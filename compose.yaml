@@ -1,0 +1,18 @@
+services:
+  mygarden-database:
+    image: 'postgres:15.2'
+    container_name: postgreSql
+    ports:
+      - '15432:5432'
+    environment:
+      - 'POSTGRES_USER=myuser'
+      - 'POSTGRES_DB=fruitdatabase'
+      - 'POSTGRES_PASSWORD=mypassword'
+  adminer:
+    image: adminer
+    container_name: adminer
+    ports:
+      - 8081:8080
+    depends_on:
+      - mygarden-database
+    restart: unless-stopped
